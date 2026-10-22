@@ -1,10 +1,32 @@
 export type Language = 'uz' | 'en' | 'ru';
-export type Theme = 'dark' | 'light';
+
+export interface SkillItem {
+  name: string;
+  percent: number;
+  level: string;
+}
+
+export interface SkillCategory {
+  key: string;
+  title: string;
+  items: SkillItem[];
+}
+
+export interface TimelineItem {
+  step: string;
+  year: string;
+  title: string;
+  institution: string;
+  status: string;
+  isActive?: boolean;
+  description: string;
+  skills: string[];
+}
 
 export interface Translations {
   nav: {
     about: string;
-    experience: string;
+    roadmap: string;
     skills: string;
     projects: string;
     contact: string;
@@ -25,24 +47,15 @@ export interface Translations {
   about: {
     sectionTag: string;
     title: string;
+    subtitle: string;
     bio: string;
-    timeline: {
-      year: string;
-      title: string;
-      institution: string;
-      description: string;
-      skills: string[];
-    }[];
+    timeline: TimelineItem[];
   };
   skills: {
     sectionTag: string;
     title: string;
     subtitle: string;
-    categories: {
-      key: string;
-      title: string;
-      items: { name: string; level: string }[];
-    }[];
+    categories: SkillCategory[];
   };
   projects: {
     sectionTag: string;
@@ -88,7 +101,7 @@ export const translations: Record<Language, Translations> = {
   uz: {
     nav: {
       about: 'men haqimda',
-      experience: 'tajriba',
+      roadmap: 'tajriba yo\'li',
       skills: 'ko\'nikmalar',
       projects: 'loyihalar',
       contact: 'aloqa',
@@ -96,7 +109,7 @@ export const translations: Record<Language, Translations> = {
     hero: {
       greeting: 'salom, mehmon. mening portfolio saytimga xush kelibsiz.',
       role: 'c#_fullstack_engineer_',
-      bio: 'Men C# .NET 9, .NET MAUI mobil ilovalari va Clean Architecture asosida yuqori samaradorlikka ega dasturiy tizimlar yarataman.',
+      bio: 'Men C# .NET 9, .NET MAUI mobil tizimlari va Clean Architecture asosida yuqori unumdorlikka ega, mustahkam dasturiy mahsulotlar yarataman.',
       studyLabel: 'ta\'lim',
       studyValue: 'PDP Universiteti — 2-kurs (Dasturiy ta\'minot muhandisligi)',
       focusLabel: 'yo\'nalish',
@@ -107,82 +120,90 @@ export const translations: Record<Language, Translations> = {
       btnContact: 'Bog\'lanish',
     },
     about: {
-      sectionTag: '# about & experience',
-      title: 'Men Haqimda & Ta\'lim Tarixi',
-      bio: 'Dasturchi muhandis. PDP Universiteti 2-kurs talabasi, C# va .NET ekotizimi bo\'yicha ixtisoslashgan. Nazariya va amaliyot uyg\'unligi orqali toza kod va mustahkam arxitekturaviy yechimlar yaratish — mening bosh mezonim.',
+      sectionTag: '# about & roadmap',
+      title: 'Ta\'lim va Rivojlanish Xaritasi',
+      subtitle: 'Boshlang\'ich qadamlardan zamonaviy C# .NET ekotizimigacha bo\'lgan muhandislik bosqichlari:',
+      bio: 'Dasturchi muhandis. PDP Universiteti 2-kurs talabasi, C# va .NET ekotizimi bo\'yicha chuqur ixtisoslashgan. Nazariya va amaliyot uyg\'unligi orqali toza kod va barqaror arxitekturaviy yechimlar yaratish — mening bosh mezonim.',
       timeline: [
         {
-          year: '2026 — 2027',
-          title: 'PDP Universiteti — 2-kurs C# yo\'nalishi',
-          institution: 'PDP University (Toshkent)',
-          description: 'Software Development & Programming, C# .NET 9, .NET MAUI mobil tizimlari, OOP, Algoritmlar va ma\'lumotlar tuzilmalari, Clean Architecture, SQLite.',
-          skills: ['C#', '.NET 9', '.NET MAUI', 'Clean Architecture', 'SQLite', 'MVVM'],
-        },
-        {
-          year: '2025 — 2026',
-          title: 'PDP Universiteti — 1-kurs Foundation',
-          institution: 'PDP University (Toshkent)',
-          description: 'Web development, Dasturlash asoslari, Python dasturlash, Node.js va Express.js Fullstack dasturlash, REST API va SQL.',
-          skills: ['Python', 'Node.js', 'Express.js', 'PostgreSQL', 'REST API'],
-        },
-        {
+          step: '01',
           year: '2024 — 2025',
           title: 'Frontend Dasturlash Asoslari & Amaliyot',
           institution: 'Frontend Course & Amaliy Loyihalar',
-          description: 'HTML5, CSS3, JavaScript ES6+, React ekotizimi, zamonaviy va moslashuvchan veb-interfeyslar yaratish amaliyoti.',
-          skills: ['HTML5', 'CSS3', 'JavaScript', 'React', 'Git'],
+          status: 'Boshlang\'ich Poya',
+          description: 'HTML5, CSS3, JavaScript ES6+, React ekotizimi, moslashuvchan va chiroyli veb-interfeyslar yaratish amaliyoti. DOM arxitekturasi va asinxron so\'rovlar.',
+          skills: ['HTML5', 'CSS3', 'JavaScript (ES6+)', 'React', 'Git'],
+        },
+        {
+          step: '02',
+          year: '2025 — 2026',
+          title: 'PDP Universiteti — 1-kurs Foundation',
+          institution: 'PDP University (Toshkent)',
+          status: 'Tizimli Dasturlash',
+          description: 'Web development, Algoritmlar va ma\'lumotlar tuzilmasi, Python dasturlash, Node.js va Express.js Fullstack tizimlar, REST API va relyatsion ma\'lumotlar bazalari.',
+          skills: ['Python', 'Node.js', 'Express.js', 'PostgreSQL', 'REST API', 'Algorithms'],
+        },
+        {
+          step: '03',
+          year: '2026 — 2027',
+          title: 'PDP Universiteti — 2-kurs C# Yo\'nalishi',
+          institution: 'PDP University (Toshkent)',
+          status: 'Hozirgi Bosqich • Professional Chuqurlashuv',
+          isActive: true,
+          description: 'Software Development & Programming, C# .NET 9, .NET MAUI kross-platform mobil tizimlari, OOP andozalari, Clean Architecture, SQLite lokal xotira va production-level loyihalar.',
+          skills: ['C#', '.NET 9', '.NET MAUI', 'Clean Architecture', 'SQLite', 'MVVM', 'Android Native'],
         },
       ],
     },
     skills: {
-      sectionTag: '# skills',
-      title: 'Texnik Ko\'nikmalar',
-      subtitle: 'Men muntazam ishlatadigan va amaliy loyihalarda qo\'llaydigan texnologiyalar:',
+      sectionTag: '# skills & proficiency',
+      title: 'Texnik Ko\'nikmalar va Darajalar',
+      subtitle: 'Har bir texnologiya bo\'yicha amaliy daraja va bilim ko\'rsatkichi:',
       categories: [
         {
           key: 'backend',
           title: 'backend & programming',
           items: [
-            { name: 'C# (.NET 9)', level: 'Asosiy' },
-            { name: 'ASP.NET Core', level: 'O\'rta' },
-            { name: 'Python', level: 'Yaxshi' },
-            { name: 'Node.js / Express', level: 'Yaxshi' },
-            { name: 'PostgreSQL', level: 'Amaliy' },
-            { name: 'SQLite', level: 'Ilg\'or' },
-            { name: 'REST API & JSON', level: 'Ilg\'or' },
+            { name: 'C# (.NET 9)', percent: 95, level: 'Ilg\'or • 95%' },
+            { name: 'SQLite', percent: 92, level: 'Ilg\'or • 92%' },
+            { name: 'REST API & JSON', percent: 90, level: 'Ilg\'or • 90%' },
+            { name: 'ASP.NET Core', percent: 82, level: 'Yaxshi • 82%' },
+            { name: 'Python', percent: 80, level: 'Yaxshi • 80%' },
+            { name: 'Node.js / Express', percent: 78, level: 'Yaxshi • 78%' },
+            { name: 'PostgreSQL', percent: 76, level: 'Amaliy • 76%' },
           ],
         },
         {
           key: 'mobile',
           title: 'mobile systems',
           items: [
-            { name: '.NET MAUI', level: 'Ilg\'or' },
-            { name: 'Android Native APK', level: 'Signed v1.2.1' },
-            { name: 'MVVM Architecture', level: 'Standart' },
-            { name: 'Android 14+ Notifications', level: 'Amaliy' },
-            { name: 'Local Database (SQLite)', level: 'Ilg\'or' },
+            { name: '.NET MAUI', percent: 94, level: 'Ilg\'or • 94%' },
+            { name: 'Android Native APK (Signed)', percent: 92, level: 'Ilg\'or • 92%' },
+            { name: 'MVVM Architecture', percent: 90, level: 'Ilg\'or • 90%' },
+            { name: 'Android 14+ Notifications', percent: 88, level: 'Ilg\'or • 88%' },
+            { name: 'Local Cache & Storage (SQLite)', percent: 92, level: 'Ilg\'or • 92%' },
           ],
         },
         {
           key: 'frontend',
           title: 'frontend & web',
           items: [
-            { name: 'React.js', level: 'Amaliy' },
-            { name: 'TypeScript', level: 'Yaxshi' },
-            { name: 'JavaScript (ES6+)', level: 'Ilg\'or' },
-            { name: 'HTML5 & CSS3', level: 'Ilg\'or' },
-            { name: 'Tailwind CSS', level: 'Ilg\'or' },
+            { name: 'HTML5 & CSS3', percent: 95, level: 'Ilg\'or • 95%' },
+            { name: 'Tailwind CSS', percent: 92, level: 'Ilg\'or • 92%' },
+            { name: 'JavaScript (ES6+)', percent: 90, level: 'Ilg\'or • 90%' },
+            { name: 'React.js', percent: 84, level: 'Yaxshi • 84%' },
+            { name: 'TypeScript', percent: 80, level: 'Yaxshi • 80%' },
           ],
         },
         {
           key: 'devops',
-          title: 'devops & tools',
+          title: 'devops & engineering tools',
           items: [
-            { name: 'Git & GitHub', level: 'Doimiy' },
-            { name: 'Docker', level: 'Boshlang\'ich' },
-            { name: 'Linux / Bash', level: 'Amaliy' },
-            { name: 'Nginx', level: 'Boshlang\'ich' },
-            { name: 'Postman', level: 'Amaliy' },
+            { name: 'Git & GitHub', percent: 90, level: 'Ilg\'or • 90%' },
+            { name: 'Postman', percent: 85, level: 'Yaxshi • 85%' },
+            { name: 'Linux / Bash', percent: 75, level: 'Amaliy • 75%' },
+            { name: 'Docker', percent: 68, level: 'Boshlang\'ich • 68%' },
+            { name: 'Nginx', percent: 65, level: 'Boshlang\'ich • 65%' },
           ],
         },
       ],
@@ -192,7 +213,7 @@ export const translations: Record<Language, Translations> = {
       title: 'Loyihalarim',
       subtitle: 'Haqiqiy foydalanuvchilar va sanoat talablari uchun yaratilgan mobil va veb tizimlar.',
       dailyPlannerTagline: 'C# .NET MAUI & Clean Architecture asosidagi kundalik reja va fokus ekotizimi',
-      dailyPlannerDesc: 'Google Calendar uslubidagi 42 katakli oylik taqvim, takrorlanuvchi vazifalar (har kuni, har hafta, ma\'lum kunlarda), 25 daqiqalik Pomodoro taymeri, GitHub uslubidagi faollik Heatmap\'i, ovozli push bildirishnomalar va SQLite bilan to\'liq avtonom ishlovchi mobil ilova.',
+      dailyPlannerDesc: 'Google Calendar uslubidagi 42 katakli oylik taqvim, takrorlanuvchi vazifalar (har dushanba, haftalik, kunlik), 25 daqiqalik Pomodoro taymeri, GitHub uslubidagi faollik Heatmap\'i, ovozli push bildirishnomalar va SQLite bilan to\'liq avtonom ishlovchi mobil ilova.',
       tabs: {
         tasks: 'Rejalar',
         calendar: 'Oylik Taqvim',
@@ -226,14 +247,14 @@ export const translations: Record<Language, Translations> = {
     contact: {
       sectionTag: '# contact',
       title: 'Bog\'lanish',
-      subtitle: 'Loyiha, amaliyot yoki jamoaga qo\'shilish taklifi bormi? Xabar qoldiring.',
+      subtitle: 'Loyiha, amaliyot yoki hamkorlik bo\'yicha xabar qoldiring.',
       copied: 'Nusxalandi!',
       copy: 'Nusxa olish',
-      quickMsg: 'Birgalikda ajoyib dasturiy yechimlar yarataylik!',
+      quickMsg: 'Birgalikda yuqori samarali dasturiy yechimlar yarataylik!',
       sendTelegram: 'Telegramda Yozish',
     },
     footer: {
-      cliLine: '$ deployed with docker • vite • tls — © 2026 nurdinjonov.dev',
+      cliLine: '$ deployed with docker • vite • tls — © 2026 nurdinjonov',
       tashkent: 'Toshkent',
       top: '^ tepaga',
     },
@@ -241,7 +262,7 @@ export const translations: Record<Language, Translations> = {
   en: {
     nav: {
       about: 'about',
-      experience: 'experience',
+      roadmap: 'roadmap',
       skills: 'skills',
       projects: 'projects',
       contact: 'contact',
@@ -260,82 +281,90 @@ export const translations: Record<Language, Translations> = {
       btnContact: 'Get in Touch',
     },
     about: {
-      sectionTag: '# about & experience',
-      title: 'About Me & Education Timeline',
+      sectionTag: '# about & roadmap',
+      title: 'Education & Engineering Roadmap',
+      subtitle: 'From foundational programming blocks to advanced C# .NET mobile engineering:',
       bio: 'Software engineer. 2nd-year student at PDP University, specializing in C# and the .NET ecosystem. I bridge academic computer science principles with production-ready software engineering, focusing on clean code, performance, and solid architectures.',
       timeline: [
         {
-          year: '2026 — 2027',
-          title: 'PDP University — 2nd Year (C# Track)',
-          institution: 'PDP University (Tashkent)',
-          description: 'Software Development & Programming, C# .NET 9, .NET MAUI mobile systems, OOP, Algorithms & Data Structures, Clean Architecture, SQLite.',
-          skills: ['C#', '.NET 9', '.NET MAUI', 'Clean Architecture', 'SQLite', 'MVVM'],
+          step: '01',
+          year: '2024 — 2025',
+          title: 'Frontend Development & Core Foundations',
+          institution: 'Frontend Course & Hands-on Projects',
+          status: 'Foundation Roots',
+          description: 'HTML5, CSS3, modern JavaScript ES6+, React ecosystem, asynchronous APIs, responsive web interfaces, and modern layout principles.',
+          skills: ['HTML5', 'CSS3', 'JavaScript (ES6+)', 'React', 'Git'],
         },
         {
+          step: '02',
           year: '2025 — 2026',
           title: 'PDP University — 1st Year Foundation',
           institution: 'PDP University (Tashkent)',
-          description: 'Web development, Programming Fundamentals, Python programming, Node.js and Express.js Fullstack, REST APIs and SQL databases.',
-          skills: ['Python', 'Node.js', 'Express.js', 'PostgreSQL', 'REST API'],
+          status: 'Systems Foundations',
+          description: 'Web development, Algorithms & Data Structures, Python programming, Node.js and Express.js Fullstack backends, REST APIs and relational databases.',
+          skills: ['Python', 'Node.js', 'Express.js', 'PostgreSQL', 'REST API', 'Algorithms'],
         },
         {
-          year: '2024 — 2025',
-          title: 'Frontend Development & Practical Projects',
-          institution: 'Frontend Course & Practical Projects',
-          description: 'HTML5, CSS3, JavaScript ES6+, React ecosystem, modern responsive web UI development.',
-          skills: ['HTML5', 'CSS3', 'JavaScript', 'React', 'Git'],
+          step: '03',
+          year: '2026 — 2027',
+          title: 'PDP University — 2nd Year (C# Specialization)',
+          institution: 'PDP University (Tashkent)',
+          status: 'Active Stage • Advanced C# & Mobile Systems',
+          isActive: true,
+          description: 'Software Development & Programming, C# .NET 9, .NET MAUI mobile systems, OOP principles, Clean Architecture, SQLite local persistence, and production Android apps.',
+          skills: ['C#', '.NET 9', '.NET MAUI', 'Clean Architecture', 'SQLite', 'MVVM', 'Android Native'],
         },
       ],
     },
     skills: {
-      sectionTag: '# skills',
-      title: 'Technical Skills',
-      subtitle: 'Technologies and tools I use on a regular basis for production and academic projects:',
+      sectionTag: '# skills & proficiency',
+      title: 'Technical Skills & Proficiency',
+      subtitle: 'Measured proficiency levels across core software engineering technologies:',
       categories: [
         {
           key: 'backend',
           title: 'backend & programming',
           items: [
-            { name: 'C# (.NET 9)', level: 'Primary' },
-            { name: 'ASP.NET Core', level: 'Intermediate' },
-            { name: 'Python', level: 'Proficient' },
-            { name: 'Node.js / Express', level: 'Proficient' },
-            { name: 'PostgreSQL', level: 'Practical' },
-            { name: 'SQLite', level: 'Advanced' },
-            { name: 'REST API & JSON', level: 'Advanced' },
+            { name: 'C# (.NET 9)', percent: 95, level: 'Advanced • 95%' },
+            { name: 'SQLite', percent: 92, level: 'Advanced • 92%' },
+            { name: 'REST API & JSON', percent: 90, level: 'Advanced • 90%' },
+            { name: 'ASP.NET Core', percent: 82, level: 'Proficient • 82%' },
+            { name: 'Python', percent: 80, level: 'Proficient • 80%' },
+            { name: 'Node.js / Express', percent: 78, level: 'Proficient • 78%' },
+            { name: 'PostgreSQL', percent: 76, level: 'Practical • 76%' },
           ],
         },
         {
           key: 'mobile',
           title: 'mobile systems',
           items: [
-            { name: '.NET MAUI', level: 'Advanced' },
-            { name: 'Android Native APK', level: 'Signed v1.2.1' },
-            { name: 'MVVM Architecture', level: 'Standard' },
-            { name: 'Android 14+ Notifications', level: 'Practical' },
-            { name: 'Local Database (SQLite)', level: 'Advanced' },
+            { name: '.NET MAUI', percent: 94, level: 'Advanced • 94%' },
+            { name: 'Android Native APK (Signed)', percent: 92, level: 'Advanced • 92%' },
+            { name: 'MVVM Architecture', percent: 90, level: 'Advanced • 90%' },
+            { name: 'Android 14+ Notifications', percent: 88, level: 'Advanced • 88%' },
+            { name: 'Local Cache & Storage (SQLite)', percent: 92, level: 'Advanced • 92%' },
           ],
         },
         {
           key: 'frontend',
           title: 'frontend & web',
           items: [
-            { name: 'React.js', level: 'Practical' },
-            { name: 'TypeScript', level: 'Proficient' },
-            { name: 'JavaScript (ES6+)', level: 'Advanced' },
-            { name: 'HTML5 & CSS3', level: 'Advanced' },
-            { name: 'Tailwind CSS', level: 'Advanced' },
+            { name: 'HTML5 & CSS3', percent: 95, level: 'Advanced • 95%' },
+            { name: 'Tailwind CSS', percent: 92, level: 'Advanced • 92%' },
+            { name: 'JavaScript (ES6+)', percent: 90, level: 'Advanced • 90%' },
+            { name: 'React.js', percent: 84, level: 'Proficient • 84%' },
+            { name: 'TypeScript', percent: 80, level: 'Proficient • 80%' },
           ],
         },
         {
           key: 'devops',
-          title: 'devops & tools',
+          title: 'devops & engineering tools',
           items: [
-            { name: 'Git & GitHub', level: 'Daily' },
-            { name: 'Docker', level: 'Foundational' },
-            { name: 'Linux / Bash', level: 'Practical' },
-            { name: 'Nginx', level: 'Foundational' },
-            { name: 'Postman', level: 'Practical' },
+            { name: 'Git & GitHub', percent: 90, level: 'Advanced • 90%' },
+            { name: 'Postman', percent: 85, level: 'Proficient • 85%' },
+            { name: 'Linux / Bash', percent: 75, level: 'Practical • 75%' },
+            { name: 'Docker', percent: 68, level: 'Foundational • 68%' },
+            { name: 'Nginx', percent: 65, level: 'Foundational • 65%' },
           ],
         },
       ],
@@ -386,7 +415,7 @@ export const translations: Record<Language, Translations> = {
       sendTelegram: 'Message on Telegram',
     },
     footer: {
-      cliLine: '$ deployed with docker • vite • tls — © 2026 nurdinjonov.dev',
+      cliLine: '$ deployed with docker • vite • tls — © 2026 nurdinjonov',
       tashkent: 'Tashkent',
       top: '^ top',
     },
@@ -394,7 +423,7 @@ export const translations: Record<Language, Translations> = {
   ru: {
     nav: {
       about: 'обо мне',
-      experience: 'опыт',
+      roadmap: 'роадмап',
       skills: 'навыки',
       projects: 'проекты',
       contact: 'контакты',
@@ -413,82 +442,90 @@ export const translations: Record<Language, Translations> = {
       btnContact: 'Связаться',
     },
     about: {
-      sectionTag: '# about & experience',
-      title: 'Обо Мне & История Обучения',
+      sectionTag: '# about & roadmap',
+      title: 'История Обучения и Роадмап',
+      subtitle: 'От фундаментальных основ программирования до мобильной разработки на C# .NET:',
       bio: 'Инженер-программист. Студент 2 курса PDP Университета, специализируюсь на стеке C# и платформе .NET. Сочетаю академические основы с промышленной разработкой, ориентируясь на чистый код, надежную архитектуру и максимальную производительность.',
       timeline: [
         {
-          year: '2026 — 2027',
-          title: 'PDP Университет — 2 курс (C# направление)',
-          institution: 'PDP University (Ташкент)',
-          description: 'Software Development & Programming, C# .NET 9, мобильные системы .NET MAUI, ООП, Алгоритмы и структуры данных, Clean Architecture, SQLite.',
-          skills: ['C#', '.NET 9', '.NET MAUI', 'Clean Architecture', 'SQLite', 'MVVM'],
-        },
-        {
-          year: '2025 — 2026',
-          title: 'PDP Университет — 1 курс Foundation',
-          institution: 'PDP University (Ташкент)',
-          description: 'Веб-разработка, основы алгоритмизации, язык Python, Node.js и Express.js Fullstack разработка, REST API и SQL.',
-          skills: ['Python', 'Node.js', 'Express.js', 'PostgreSQL', 'REST API'],
-        },
-        {
+          step: '01',
           year: '2024 — 2025',
           title: 'Основы Frontend Разработки & Практика',
           institution: 'Frontend Course & Практические проекты',
-          description: 'HTML5, CSS3, JavaScript ES6+, экосистема React, создание современных адаптивных интерфейсов.',
-          skills: ['HTML5', 'CSS3', 'JavaScript', 'React', 'Git'],
+          status: 'Фундаментальная База',
+          description: 'HTML5, CSS3, JavaScript ES6+, экосистема React, создание современных адаптивных интерфейсов, асинхронные запросы и DOM архитектура.',
+          skills: ['HTML5', 'CSS3', 'JavaScript (ES6+)', 'React', 'Git'],
+        },
+        {
+          step: '02',
+          year: '2025 — 2026',
+          title: 'PDP Университет — 1 курс Foundation',
+          institution: 'PDP University (Ташкент)',
+          status: 'Системное Программирование',
+          description: 'Веб-разработка, алгоритмы и структуры данных, язык Python, Node.js и Express.js Fullstack разработка, REST API и реляционные базы данных.',
+          skills: ['Python', 'Node.js', 'Express.js', 'PostgreSQL', 'REST API', 'Algorithms'],
+        },
+        {
+          step: '03',
+          year: '2026 — 2027',
+          title: 'PDP Университет — 2 курс (C# направление)',
+          institution: 'PDP University (Ташкент)',
+          status: 'Текущий Этап • Углубление в C#',
+          isActive: true,
+          description: 'Software Development & Programming, C# .NET 9, мобильные системы .NET MAUI, ООП, Clean Architecture, локальное хранилище SQLite и production приложения.',
+          skills: ['C#', '.NET 9', '.NET MAUI', 'Clean Architecture', 'SQLite', 'MVVM', 'Android Native'],
         },
       ],
     },
     skills: {
-      sectionTag: '# skills',
-      title: 'Технические Навыки',
-      subtitle: 'Технологии и инструменты, которые я регулярно применяю в разработке:',
+      sectionTag: '# skills & proficiency',
+      title: 'Технические Навыки и Уровни',
+      subtitle: 'Показатели владения ключевыми технологиями разработки:',
       categories: [
         {
           key: 'backend',
           title: 'backend & programming',
           items: [
-            { name: 'C# (.NET 9)', level: 'Основной' },
-            { name: 'ASP.NET Core', level: 'Средний' },
-            { name: 'Python', level: 'Хороший' },
-            { name: 'Node.js / Express', level: 'Хороший' },
-            { name: 'PostgreSQL', level: 'Практический' },
-            { name: 'SQLite', level: 'Продвинутый' },
-            { name: 'REST API & JSON', level: 'Продвинутый' },
+            { name: 'C# (.NET 9)', percent: 95, level: 'Продвинутый • 95%' },
+            { name: 'SQLite', percent: 92, level: 'Продвинутый • 92%' },
+            { name: 'REST API & JSON', percent: 90, level: 'Продвинутый • 90%' },
+            { name: 'ASP.NET Core', percent: 82, level: 'Хороший • 82%' },
+            { name: 'Python', percent: 80, level: 'Хороший • 80%' },
+            { name: 'Node.js / Express', percent: 78, level: 'Хороший • 78%' },
+            { name: 'PostgreSQL', percent: 76, level: 'Практический • 76%' },
           ],
         },
         {
           key: 'mobile',
           title: 'mobile systems',
           items: [
-            { name: '.NET MAUI', level: 'Продвинутый' },
-            { name: 'Android Native APK', level: 'Signed v1.2.1' },
-            { name: 'MVVM Architecture', level: 'Стандарт' },
-            { name: 'Android 14+ Notifications', level: 'Практический' },
-            { name: 'Local Database (SQLite)', level: 'Продвинутый' },
+            { name: '.NET MAUI', percent: 94, level: 'Продвинутый • 94%' },
+            { name: 'Android Native APK (Signed)', percent: 92, level: 'Продвинутый • 92%' },
+            { name: 'MVVM Architecture', percent: 90, level: 'Продвинутый • 90%' },
+            { name: 'Android 14+ Notifications', percent: 88, level: 'Продвинутый • 88%' },
+            { name: 'Local Cache & Storage (SQLite)', percent: 92, level: 'Продвинутый • 92%' },
           ],
         },
         {
           key: 'frontend',
           title: 'frontend & web',
           items: [
-            { name: 'React.js', level: 'Практический' },
-            { name: 'TypeScript', level: 'Хороший' },
-            { name: 'JavaScript (ES6+)', level: 'Продвинутый' },
-            { name: 'HTML5 & CSS3', level: 'Продвинутый' },
-            { name: 'Tailwind CSS', level: 'Продвинутый' },
+            { name: 'HTML5 & CSS3', percent: 95, level: 'Продвинутый • 95%' },
+            { name: 'Tailwind CSS', percent: 92, level: 'Продвинутый • 92%' },
+            { name: 'JavaScript (ES6+)', percent: 90, level: 'Продвинутый • 90%' },
+            { name: 'React.js', percent: 84, level: 'Хороший • 84%' },
+            { name: 'TypeScript', percent: 80, level: 'Хороший • 80%' },
           ],
         },
         {
           key: 'devops',
-          title: 'devops & tools',
+          title: 'devops & engineering tools',
           items: [
-            { name: 'Git & GitHub', level: 'Постоянно' },
-            { name: 'Docker', level: 'Базовый' },
-            { name: 'Linux / Bash', level: 'Практический' },
-            { name: 'Nginx', level: 'Базовый' },
-            { name: 'Postman', level: 'Практический' },
+            { name: 'Git & GitHub', percent: 90, level: 'Продвинутый • 90%' },
+            { name: 'Postman', percent: 85, level: 'Хороший • 85%' },
+            { name: 'Linux / Bash', percent: 75, level: 'Практический • 75%' },
+            { name: 'Docker', percent: 68, level: 'Базовый • 68%' },
+            { name: 'Nginx', percent: 65, level: 'Базовый • 65%' },
           ],
         },
       ],
@@ -498,7 +535,7 @@ export const translations: Record<Language, Translations> = {
       title: 'Мои Проекты',
       subtitle: 'Мобильные и веб-системы, созданные для решения реальных задач.',
       dailyPlannerTagline: 'Экосистема ежедневного планирования и фокуса на базе C# .NET MAUI & Clean Architecture',
-      dailyPlannerDesc: '42-клеточный ежемесячный календарь в стиле Google Calendar, повторяющиеся задачи (каждый день, еженедельно, по дням недели), 25-минутный таймер Pomodoro, Heatmap активности в стиле GitHub, звуковые пуш-уведомления и локальное хранилище SQLite.',
+      dailyPlannerDesc: '42-клеточный ежемесячный календарь в стиле Google Calendar, повторяющиеся задачи (каждый понедельник, еженедельно, ежедневно), 25-минутный таймер Pomodoro, Heatmap активности в стиле GitHub, звуковые пуш-уведомления и локальное хранилище SQLite.',
       tabs: {
         tasks: 'Задачи',
         calendar: 'Календарь',
@@ -535,11 +572,11 @@ export const translations: Record<Language, Translations> = {
       subtitle: 'Есть проект, предложение о работе или сотрудничестве? Напишите мне.',
       copied: 'Скопировано!',
       copy: 'Скопировать',
-      quickMsg: 'Давайте создавать качественные программные решения вместе!',
+      quickMsg: 'Давайте создавать надежные программные решения вместе!',
       sendTelegram: 'Написать в Telegram',
     },
     footer: {
-      cliLine: '$ deployed with docker • vite • tls — © 2026 nurdinjonov.dev',
+      cliLine: '$ deployed with docker • vite • tls — © 2026 nurdinjonov',
       tashkent: 'Ташкент',
       top: '^ наверх',
     },

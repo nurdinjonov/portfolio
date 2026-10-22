@@ -31,28 +31,28 @@ export const Footer: React.FC = () => {
   };
 
   return (
-    <footer className="border-t py-10 px-4 sm:px-6 transition-colors duration-300 font-mono text-xs border-slate-200 dark:border-white/5 bg-slate-50 dark:bg-slate-950/80">
-      <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-between gap-5 text-slate-500 dark:text-slate-400">
+    <footer className="border-t py-12 px-4 sm:px-8 font-mono text-xs sm:text-sm border-white/5 bg-slate-950/90 backdrop-blur-xl">
+      <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6 text-slate-400">
         
         {/* Left: CLI deployment status */}
         <div className="flex items-center gap-2 text-center sm:text-left">
-          <span className="text-emerald-500 font-bold">$</span>
+          <span className="text-emerald-400 font-bold">$</span>
           <span>deployed with docker • vite • tls — © 2026 nurdinjonov</span>
         </div>
 
         {/* Center: Live Tashkent Time */}
-        <div className="flex items-center gap-1.5 px-3 py-1 rounded-md border border-slate-200 dark:border-white/10 bg-white dark:bg-slate-900/60 text-[11px]">
-          <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-          <span>{t.footer.tashkent}: {time || '16:50:00'} (UTC+5)</span>
+        <div className="flex items-center gap-2 px-3.5 py-1.5 rounded-xl border border-white/10 bg-slate-900/80 text-xs sm:text-sm">
+          <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse" />
+          <span>{t.footer.tashkent}: {time || '17:00:00'} (UTC+5)</span>
         </div>
 
         {/* Right: Scroll to top */}
         <button
           onClick={scrollToTop}
-          className="flex items-center gap-1 text-slate-500 dark:text-slate-400 hover:text-emerald-500 transition-colors cursor-pointer"
+          className="flex items-center gap-1.5 text-slate-400 hover:text-emerald-400 transition-colors cursor-pointer text-xs sm:text-sm font-semibold"
         >
           <span>{t.footer.top}</span>
-          <ArrowUp className="w-3.5 h-3.5" />
+          <ArrowUp className="w-4 h-4" />
         </button>
 
       </div>

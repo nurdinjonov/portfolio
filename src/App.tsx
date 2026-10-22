@@ -1,4 +1,4 @@
-import { AppProvider, useApp } from './context/AppContext';
+import { AppProvider } from './context/AppContext';
 import { FullScreenCosmos } from './components/3d/FullScreenCosmos';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
@@ -9,17 +9,9 @@ import { Contact } from './components/Contact';
 import { Footer } from './components/Footer';
 
 function PortfolioMain() {
-  const { theme } = useApp();
-
   return (
-    <div
-      className={`min-h-screen relative transition-colors duration-300 selection:bg-emerald-500/30 selection:text-emerald-300 ${
-        theme === 'dark'
-          ? 'bg-[#030712] text-slate-100'
-          : 'bg-[#f8fafc] text-slate-900'
-      }`}
-    >
-      {/* Full Screen 3D Interactive Cosmos Scene */}
+    <div className="min-h-screen relative bg-[#030712] text-slate-100 selection:bg-emerald-500/30 selection:text-emerald-300 bg-grid-pattern">
+      {/* Grand Full-Screen 3D Cyber Core & Wave Mesh */}
       <FullScreenCosmos />
 
       {/* Main UI Layer */}

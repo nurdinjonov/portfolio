@@ -1,12 +1,10 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { translations } from '../data/translations';
-import type { Language, Theme, Translations } from '../data/translations';
+import type { Language, Translations } from '../data/translations';
 
 interface AppContextType {
   lang: Language;
   setLang: (lang: Language) => void;
-  theme: Theme;
-  toggleTheme: () => void;
   t: Translations;
 }
 
@@ -25,37 +23,16 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     localStorage.setItem('portfolio_lang', newLang);
   };
 
-  // Theme State
-  const [theme, setThemeState] = useState<Theme>(() => {
-    const saved = localStorage.getItem('portfolio_theme');
-    if (saved === 'dark' || saved === 'light') return saved;
-    return 'dark';
-  });
-
-  const toggleTheme = () => {
-    setThemeState((prev) => {
-      const next = prev === 'dark' ? 'light' : 'dark';
-      localStorage.setItem('portfolio_theme', next);
-      return next;
-    });
-  };
-
+  // Permanently lock document to dark mode
   useEffect(() => {
     const root = document.documentElement;
-    if (theme === 'dark') {
-      root.classList.add('dark');
-      root.classList.remove('light');
-    } else {
-      root.classList.add('light');
-      root.classList.remove('dark');
-    }
-  }, [theme]);
+    root.classList.add('dark');
+    root.classList.remove('light');
+  }, []);
 
   const value = {
     lang,
     setLang,
-    theme,
-    toggleTheme,
     t: translations[lang],
   };
 
