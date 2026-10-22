@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ArrowUp, ShieldCheck } from 'lucide-react';
+import { ArrowUp } from 'lucide-react';
 import { soundFX } from '../utils/audio';
 
 export const Footer: React.FC = () => {
@@ -34,23 +34,19 @@ export const Footer: React.FC = () => {
         
         {/* Left: Brand & Copyright */}
         <div className="flex flex-col sm:flex-row items-center gap-3">
-          <div className="font-mono text-white font-bold tracking-wider flex items-center gap-1.5">
+          <div className="font-sans text-white font-bold tracking-tight flex items-center gap-2">
             <span className="w-2 h-2 rounded-full bg-indigo-500 animate-pulse" />
-            <span>xnurd.dev</span>
+            <span>Xojiakbar Nurdinjonov</span>
           </div>
           <span className="hidden sm:inline text-slate-600">•</span>
-          <div>© 2026 Xojiakbar Nurdinjonov. Barcha huquqlar himoyalangan.</div>
+          <div>© 2026 Barcha huquqlar himoyalangan.</div>
         </div>
 
-        {/* Center: Live Tashkent Time & Telemetry */}
+        {/* Center: Live Tashkent Time */}
         <div className="flex items-center gap-3 font-mono text-[11px]">
-          <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-slate-900 border border-slate-800 text-slate-300">
+          <div className="flex items-center gap-1.5 px-3 py-1 rounded-md bg-slate-900 border border-slate-800 text-slate-300">
             <span className="text-emerald-400">●</span>
             <span>Toshkent: {time || '12:00:00'} (UTC+5)</span>
-          </div>
-          <div className="hidden lg:flex items-center gap-1 text-slate-500">
-            <ShieldCheck className="w-3.5 h-3.5 text-indigo-400" />
-            <span>Zero-Leak DAL</span>
           </div>
         </div>
 

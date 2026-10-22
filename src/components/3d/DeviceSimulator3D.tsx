@@ -14,6 +14,12 @@ export const DeviceSimulator3D: React.FC<DeviceSimulatorProps> = ({
     (activeScreenId as 'tasks' | 'calendar' | 'pomodoro' | 'stats') || 'tasks'
   );
 
+  React.useEffect(() => {
+    if (activeScreenId && ['tasks', 'calendar', 'pomodoro', 'stats'].includes(activeScreenId)) {
+      setCurrentTab(activeScreenId as 'tasks' | 'calendar' | 'pomodoro' | 'stats');
+    }
+  }, [activeScreenId]);
+
   const [rotation, setRotation] = useState({ x: 8, y: -12 });
   const [isDragging, setIsDragging] = useState(false);
   const [dragStart, setDragStart] = useState({ x: 0, y: 0 });

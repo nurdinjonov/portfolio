@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Download, ExternalLink, GitBranch, Layers, Check, ShieldCheck, X, ChevronRight } from 'lucide-react';
+import { Download, ExternalLink, Layers, Check, ShieldCheck, X, ChevronRight, Smartphone } from 'lucide-react';
 import { projects } from '../data/projects';
 import { DeviceSimulator3D } from './3d/DeviceSimulator3D';
 import { soundFX } from '../utils/audio';
@@ -40,49 +40,49 @@ export const Projects: React.FC = () => {
   };
 
   return (
-    <section id="projects" className="py-24 px-4 max-w-6xl mx-auto relative">
+    <section id="projects" className="py-24 px-4 max-w-6xl mx-auto relative z-10">
       {/* Glow ambient background */}
-      <div className="absolute top-1/2 left-0 w-96 h-96 bg-indigo-600/10 rounded-full blur-[140px] pointer-events-none" />
+      <div className="absolute top-1/2 left-0 w-96 h-96 bg-indigo-600/15 rounded-full blur-[140px] pointer-events-none" />
 
       {/* Section Header */}
       <div className="text-center max-w-3xl mx-auto mb-16">
-        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-indigo-950/50 border border-indigo-500/30 text-xs font-mono text-indigo-300 mb-3">
-          <Layers className="w-3.5 h-3.5 text-indigo-400" />
-          <span>Ishlab Chiqilgan Dasturiy Mahsulotlar</span>
+        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-indigo-950/60 border border-indigo-500/30 text-xs font-mono text-indigo-300 mb-3">
+          <Smartphone className="w-3.5 h-3.5 text-indigo-400" />
+          <span>Flagman Mobil Loyiha</span>
         </div>
         <h2 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
-          Mobil & Backend Yechimlari
+          DailyPlanner & Focus (v1.2.1)
         </h2>
-        <p className="mt-3 text-sm sm:text-base text-slate-400">
-          Clean Architecture asosidagi, har bir qatori toza va sinovdan o'tgan flagman loyihalar.
+        <p className="mt-3 text-sm sm:text-base text-slate-300">
+          Clean Architecture va MVVM andozalari asosidagi zamonaviy C# .NET MAUI ekotizimi.
         </p>
       </div>
 
       {/* Primary Project Card */}
-      <div className="glass-panel rounded-3xl p-6 sm:p-10 border border-white/10 relative overflow-hidden bg-gradient-to-b from-slate-900/60 to-slate-950/80 shadow-2xl">
+      <div className="glass-panel rounded-3xl p-6 sm:p-10 border border-white/10 relative overflow-hidden bg-gradient-to-b from-slate-900/70 to-slate-950/90 shadow-2xl">
         
         {/* Top bar info */}
-        <div className="flex flex-wrap items-center justify-between gap-3 pb-6 border-b border-white/5">
+        <div className="flex flex-wrap items-center justify-between gap-3 pb-6 border-b border-white/10">
           <div className="flex items-center gap-3">
-            <span className="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-600 to-emerald-500 flex items-center justify-center text-lg font-bold text-white shadow-lg">
+            <span className="w-11 h-11 rounded-2xl bg-gradient-to-tr from-indigo-600 to-emerald-500 flex items-center justify-center text-lg font-bold text-white shadow-lg shadow-indigo-950/50">
               DP
             </span>
             <div>
               <div className="flex items-center gap-2">
-                <h3 className="text-xl font-bold text-white">{primaryProject.title}</h3>
-                <span className="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+                <h3 className="text-xl sm:text-2xl font-bold text-white">{primaryProject.title}</h3>
+                <span className="px-2.5 py-0.5 rounded text-[11px] font-mono font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
                   {primaryProject.version}
                 </span>
               </div>
-              <div className="text-xs text-slate-400">{primaryProject.category}</div>
+              <div className="text-xs text-slate-400">{primaryProject.category} • Android & Desktop</div>
             </div>
           </div>
 
           <div className="flex items-center gap-2 text-xs font-mono">
-            <span className="flex items-center gap-1 px-2.5 py-1 rounded-lg bg-slate-900 border border-slate-800 text-slate-400">
-              <GitBranch className="w-3.5 h-3.5 text-indigo-400" /> master: 70097d3
+            <span className="px-3 py-1 rounded-lg bg-indigo-950/60 border border-indigo-500/30 text-indigo-300 font-semibold">
+              .NET 9 MAUI
             </span>
-            <span className="px-2.5 py-1 rounded-lg bg-slate-900 border border-slate-800 text-emerald-400 font-semibold">
+            <span className="px-3 py-1 rounded-lg bg-emerald-950/60 border border-emerald-500/30 text-emerald-300 font-semibold">
               Signed APK
             </span>
           </div>
@@ -93,9 +93,36 @@ export const Projects: React.FC = () => {
           
           {/* Left Column: 3D Smartphone Simulator */}
           <div className="lg:col-span-5 flex flex-col items-center justify-center">
+            
+            {/* Interactive Screen Switcher Chips above the phone */}
+            <div className="flex flex-wrap justify-center gap-1.5 mb-2">
+              {[
+                { id: 'tasks', label: 'Rejalar' },
+                { id: 'calendar', label: 'Oylik Taqvim' },
+                { id: 'pomodoro', label: 'Pomodoro' },
+                { id: 'stats', label: 'Heatmap' },
+              ].map((tab) => (
+                <button
+                  key={tab.id}
+                  onClick={() => {
+                    soundFX.playClick(800, 0.03);
+                    setActiveScreen(tab.id);
+                  }}
+                  className={`px-3 py-1 rounded-lg text-xs font-semibold transition-all ${
+                    activeScreen === tab.id
+                      ? 'bg-indigo-600 text-white shadow-md shadow-indigo-950'
+                      : 'bg-slate-800/80 text-slate-400 hover:text-white hover:bg-slate-700'
+                  }`}
+                >
+                  {tab.label}
+                </button>
+              ))}
+            </div>
+
             <DeviceSimulator3D activeScreenId={activeScreen} onScreenChange={setActiveScreen} />
+            
             <div className="mt-2 text-center text-xs text-slate-400">
-              Yuqoridagi smartfon ekranini aylantiring yoki pastki tugmalaridan bo'limlarni almashtiring.
+              * Smartfonni sichqoncha bilan 3D aylantirib ko'rishingiz mumkin
             </div>
           </div>
 
@@ -104,7 +131,7 @@ export const Projects: React.FC = () => {
             
             {/* Tagline & Overview */}
             <div>
-              <h4 className="text-lg sm:text-xl font-bold text-white mb-2">
+              <h4 className="text-xl sm:text-2xl font-bold text-white mb-2">
                 {primaryProject.tagline}
               </h4>
               <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
@@ -114,48 +141,48 @@ export const Projects: React.FC = () => {
 
             {/* Solved Engineering Challenges */}
             <div className="space-y-2.5">
-              <div className="text-xs font-mono text-indigo-400 uppercase tracking-wider flex items-center gap-1.5">
-                <ShieldCheck className="w-3.5 h-3.5" />
-                <span>Yechilgan Muhandislik Masalalari:</span>
+              <div className="text-xs font-mono text-indigo-400 uppercase tracking-wider flex items-center gap-1.5 font-bold">
+                <ShieldCheck className="w-4 h-4 text-emerald-400" />
+                <span>Asosiy Imkoniyatlar & Arxitektura:</span>
               </div>
 
               <div className="space-y-2 text-xs">
-                <div className="p-2.5 rounded-xl bg-slate-900/80 border border-white/5 flex items-start gap-2.5">
+                <div className="p-3 rounded-2xl bg-slate-900/80 border border-white/5 flex items-start gap-2.5">
                   <Check className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
                   <div>
                     <strong className="text-white">Google Calendar Uslubidagi 42 Katakli Oylik Taqvim:</strong>
                     <span className="text-slate-400 block mt-0.5">
-                      Dushanbadan boshlanuvchi to'liq oylik to'r, kunlik ko'p rangli vazifa indikator nuqtalari (dots) va kun tanlanganda uning vazifalari ro'yxatini uzluksiz ochish logikasi.
+                      Dushanbadan boshlanuvchi to'liq oylik to'r, kunlar ustidagi ko'p rangli vazifa nuqtalari (dots) va har bir kunga tegishli vazifalar panelini ochish.
                     </span>
                   </div>
                 </div>
 
-                <div className="p-2.5 rounded-xl bg-slate-900/80 border border-white/5 flex items-start gap-2.5">
+                <div className="p-3 rounded-2xl bg-slate-900/80 border border-white/5 flex items-start gap-2.5">
                   <Check className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
                   <div>
-                    <strong className="text-white">Natural Language Parser (NLP Leksik Tahlil):</strong>
+                    <strong className="text-white">Natural Language Parser (AI Input):</strong>
                     <span className="text-slate-400 block mt-0.5">
-                      Foydalanuvchi yozgan bitta jumlani ("Ertaga 16:30 da C# darsi #PDP !yuqori") Regex orqali tahlil qilib, sana, vaqt, toifa va prioritetni avtomatik ajratib olish.
+                      Oddiy yozilgan gapdan ("Ertaga 16:30 da C# darsi #PDP !yuqori") sana, vaqt, toifa va prioritetni Regex orqali bir zumda ajratib olish.
                     </span>
                   </div>
                 </div>
 
-                <div className="p-2.5 rounded-xl bg-slate-900/80 border border-white/5 flex items-start gap-2.5">
+                <div className="p-3 rounded-2xl bg-slate-900/80 border border-white/5 flex items-start gap-2.5">
                   <Check className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
                   <div>
-                    <strong className="text-white">Android Crash Bartaraf Etilishi & Xavfsiz Mavzu Dispetcheri:</strong>
+                    <strong className="text-white">Pomodoro Taymeri, Streaks va GitHub Heatmap:</strong>
                     <span className="text-slate-400 block mt-0.5">
-                      Mavzu (Kun/Tun) almashishida Android rendererining animasiya kolliziyasini UI Dispatcher bilan bartaraf etish hamda ilova ochilishidayoq saqlangan rejimni 0-millisekundda yuklash.
+                      25 daqiqalik fokus rejimlar, Duolingo uslubidagi kundalik intizom zanjiri (🔥) va so'nggi 35 kunlik faollikning yashil matritsasi.
                     </span>
                   </div>
                 </div>
 
-                <div className="p-2.5 rounded-xl bg-slate-900/80 border border-white/5 flex items-start gap-2.5">
+                <div className="p-3 rounded-2xl bg-slate-900/80 border border-white/5 flex items-start gap-2.5">
                   <Check className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
                   <div>
-                    <strong className="text-white">ILLink & AOT Optimizatsiyasi:</strong>
+                    <strong className="text-white">Android 13/14+ Ovozli Push Bildirishnomalar:</strong>
                     <span className="text-slate-400 block mt-0.5">
-                      Keraksiz kutubxonalarni avtomatik kesish orqali 70+ MB bo'lishi mumkin bo'lgan dasturni 31.57 MB ga tushirish va xotira oqishini (memory leak) nolga yetkazish.
+                      Yuqori prioritetli NotificationChannel, fon rejimida eslatuvchi signallar va AOT optimizatsiyasi orqali yengil 31.57 MB hajm.
                     </span>
                   </div>
                 </div>
@@ -169,7 +196,7 @@ export const Projects: React.FC = () => {
                   soundFX.playClick(650, 0.03);
                   setShowArchModal(true);
                 }}
-                className="inline-flex items-center gap-2 text-xs font-mono text-indigo-300 hover:text-indigo-200 bg-indigo-950/60 hover:bg-indigo-900/70 border border-indigo-500/40 px-3.5 py-2 rounded-xl transition-all"
+                className="inline-flex items-center gap-2 text-xs font-mono text-indigo-300 hover:text-indigo-200 bg-indigo-950/70 hover:bg-indigo-900/80 border border-indigo-500/40 px-4 py-2 rounded-xl transition-all"
               >
                 <span>📐 Clean Architecture Qatlamlari Diagrammasi</span>
                 <ChevronRight className="w-3.5 h-3.5" />
@@ -191,15 +218,18 @@ export const Projects: React.FC = () => {
               </div>
             </div>
 
-            {/* Action Buttons */}
-            <div className="flex flex-wrap items-center gap-3 pt-2">
+            {/* Big APK Download & GitHub Buttons */}
+            <div className="flex flex-wrap items-center gap-3.5 pt-2">
               <button
                 onClick={handleDownloadApk}
                 disabled={downloading}
-                className="px-5 py-3 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-500 hover:from-emerald-500 hover:to-teal-400 text-white font-bold text-xs sm:text-sm flex items-center gap-2 shadow-lg shadow-emerald-950/50 hover:shadow-emerald-900/70 transition-all hover:scale-[1.02] active:scale-[0.98]"
+                className="px-6 py-3.5 rounded-2xl bg-gradient-to-r from-emerald-600 via-teal-500 to-emerald-500 hover:from-emerald-500 hover:to-teal-400 text-white font-bold text-sm sm:text-base flex items-center gap-3 shadow-2xl shadow-emerald-950/70 hover:shadow-emerald-900/90 transition-all hover:scale-[1.03] active:scale-[0.98] border border-emerald-400/30"
               >
-                <Download className="w-4 h-4" />
-                <span>{downloading ? 'Yuklanmoqda...' : '📱 APK Yuklab Olish (31.5 MB)'}</span>
+                <Download className="w-5 h-5" />
+                <div className="flex flex-col text-left">
+                  <span>{downloading ? 'APK Yuklanmoqda...' : 'DailyPlanner.apk Yuklab Olish'}</span>
+                  <span className="text-[10px] text-emerald-100 font-mono font-normal">v1.2.1 Signed • 31.57 MB</span>
+                </div>
               </button>
 
               <a
@@ -207,9 +237,9 @@ export const Projects: React.FC = () => {
                 target="_blank"
                 rel="noreferrer"
                 onClick={() => soundFX.playClick(800, 0.03)}
-                className="px-5 py-3 rounded-xl glass-panel hover:bg-slate-800 text-slate-200 hover:text-white font-semibold text-xs sm:text-sm flex items-center gap-2 border border-slate-700 transition-all hover:scale-[1.02] active:scale-[0.98]"
+                className="px-5 py-3.5 rounded-2xl glass-panel hover:bg-slate-800 text-slate-200 hover:text-white font-semibold text-xs sm:text-sm flex items-center gap-2 border border-slate-700 transition-all hover:scale-[1.02] active:scale-[0.98]"
               >
-                <span>💻 GitHub Repozitoriy</span>
+                <span>GitHub Repozitoriy</span>
                 <ExternalLink className="w-4 h-4 text-slate-400" />
               </a>
             </div>
@@ -242,12 +272,12 @@ export const Projects: React.FC = () => {
             {/* Architecture Diagram */}
             <div className="space-y-3 font-mono text-xs">
               {/* Presentation Layer */}
-              <div className="p-3.5 rounded-xl bg-indigo-950/40 border border-indigo-500/30">
+              <div className="p-3.5 rounded-xl bg-indigo-950/50 border border-indigo-500/30">
                 <div className="font-bold text-indigo-300 flex justify-between items-center">
                   <span>1. Presentation Layer (Views & ViewModels)</span>
                   <span className="text-[10px] bg-indigo-900/60 px-2 py-0.5 rounded text-indigo-200">MAUI UI</span>
                 </div>
-                <div className="text-[11px] text-slate-400 mt-1">
+                <div className="text-[11px] text-slate-300 mt-1">
                   • <code>MainPage</code>, <code>CalendarPage</code>, <code>PomodoroPage</code>, <code>HabitsPage</code>, <code>ProfilePage</code>
                 </div>
                 <div className="text-[11px] text-slate-400">
@@ -256,30 +286,30 @@ export const Projects: React.FC = () => {
               </div>
 
               {/* Core / Domain Layer */}
-              <div className="p-3.5 rounded-xl bg-emerald-950/40 border border-emerald-500/30">
+              <div className="p-3.5 rounded-xl bg-emerald-950/50 border border-emerald-500/30">
                 <div className="font-bold text-emerald-300 flex justify-between items-center">
-                  <span>2. Core Domain Layer (Models & Business Logic)</span>
+                  <span>2. Core Domain Layer (Models & Business Rules)</span>
                   <span className="text-[10px] bg-emerald-900/60 px-2 py-0.5 rounded text-emerald-200">Pure C#</span>
                 </div>
-                <div className="text-[11px] text-slate-400 mt-1">
+                <div className="text-[11px] text-slate-300 mt-1">
                   • <code>PlanTask</code>, <code>Habit</code>, <code>TaskCompletionRecord</code>, <code>PomodoroSession</code>
                 </div>
                 <div className="text-[11px] text-slate-400">
-                  • Hech qanday tashqi freymvorkka bog'lanmagan toza biznes qoidalari.
+                  • Tashqi freymvorklarga bog'lanmagan sof domen obyektlari.
                 </div>
               </div>
 
               {/* Infrastructure Layer */}
-              <div className="p-3.5 rounded-xl bg-purple-950/40 border border-purple-500/30">
+              <div className="p-3.5 rounded-xl bg-purple-950/50 border border-purple-500/30">
                 <div className="font-bold text-purple-300 flex justify-between items-center">
                   <span>3. Infrastructure Layer (Data & Native Platform Services)</span>
                   <span className="text-[10px] bg-purple-900/60 px-2 py-0.5 rounded text-purple-200">SQLite & Android</span>
                 </div>
-                <div className="text-[11px] text-slate-400 mt-1">
+                <div className="text-[11px] text-slate-300 mt-1">
                   • <code>DatabaseContext</code>, <code>PlanRepository</code>, <code>HabitRepository</code>
                 </div>
                 <div className="text-[11px] text-slate-400">
-                  • <code>NotificationService</code> (Android 13/14+ <code>NotificationChannel</code>, <code>USE_EXACT_ALARM</code>)
+                  • <code>NotificationService</code> (Android 14 <code>NotificationChannel</code>, <code>USE_EXACT_ALARM</code>)
                 </div>
               </div>
             </div>
@@ -287,9 +317,9 @@ export const Projects: React.FC = () => {
             <div className="mt-6 flex justify-end">
               <button
                 onClick={() => setShowArchModal(false)}
-                className="px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-semibold text-xs transition-colors"
+                className="px-5 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-semibold text-xs transition-colors"
               >
-                Tushundim
+                Tushunarli
               </button>
             </div>
           </div>

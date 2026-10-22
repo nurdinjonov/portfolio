@@ -30,7 +30,7 @@ export const projects: Project[] = [
     ],
     apkFileName: 'DailyPlanner.apk',
     apkSize: '31.57 MB',
-    githubUrl: 'https://github.com/xnurd/DailyPlanner',
+    githubUrl: 'https://github.com/nurdinjonov/DailyPlanner',
     featured: true,
     metrics: [
       { label: 'Hajmi (AOT)', value: '31.5 MB' },
