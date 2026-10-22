@@ -1,104 +1,59 @@
 import React from 'react';
-import { Terminal, Layers, Database, Server, Code2, Cpu } from 'lucide-react';
-import { skillCategories } from '../data/skills';
+import { useApp } from '../context/AppContext';
 import { soundFX } from '../utils/audio';
 
 export const Skills: React.FC = () => {
-  const getCategoryIcon = (iconName: string) => {
-    switch (iconName) {
-      case 'Terminal':
-        return <Terminal className="w-5 h-5 text-indigo-400" />;
-      case 'Layers':
-        return <Layers className="w-5 h-5 text-emerald-400" />;
-      case 'Database':
-        return <Database className="w-5 h-5 text-amber-400" />;
-      case 'Server':
-        return <Server className="w-5 h-5 text-cyan-400" />;
-      default:
-        return <Code2 className="w-5 h-5 text-indigo-400" />;
-    }
-  };
+  const { t } = useApp();
 
   return (
-    <section id="skills" className="py-24 px-4 max-w-6xl mx-auto relative">
-      {/* Background glow */}
-      <div className="absolute top-1/3 right-0 w-80 h-80 bg-emerald-600/10 rounded-full blur-[120px] pointer-events-none" />
-
-      {/* Section Header */}
-      <div className="text-center max-w-3xl mx-auto mb-16">
-        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-950/50 border border-emerald-500/30 text-xs font-mono text-emerald-300 mb-3">
-          <Cpu className="w-3.5 h-3.5 text-emerald-400" />
-          <span>Arxitekturaviy Kompetentsiyalar</span>
-        </div>
-        <h2 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
-          Texnologik Stek & Standartlar
+    <section id="skills" className="py-20 px-4 sm:px-6 max-w-4xl mx-auto relative z-10">
+      
+      {/* CLI Section Header: # skills */}
+      <div className="mb-10">
+        <h2 className="font-mono text-xl sm:text-2xl font-bold text-slate-900 dark:text-white flex items-center gap-2">
+          <span className="text-emerald-500">#</span>
+          <span>skills</span>
         </h2>
-        <p className="mt-3 text-sm sm:text-base text-slate-400">
-          Shunchaki sintaksis emas, balki xotirani tejash, barqarorlik va sanoat talablari asosidagi modulli arxitektura.
+        <p className="mt-2 text-xs sm:text-sm text-slate-500 dark:text-slate-400 font-mono">
+          {t.skills.subtitle}
         </p>
       </div>
 
-      {/* 4 Quadrants Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {skillCategories.map((category) => (
-          <div
-            key={category.title}
-            onMouseEnter={() => soundFX.playClick(1000, 0.02)}
-            className="glass-panel rounded-2xl p-6 sm:p-8 border border-white/10 hover:border-indigo-500/40 transition-all duration-300 relative group overflow-hidden bg-slate-900/40 hover:bg-slate-900/70"
-          >
-            {/* Header of the Quadrant */}
-            <div className="flex items-center gap-3 mb-4">
-              <div className="w-10 h-10 rounded-xl bg-slate-800/80 border border-slate-700/80 flex items-center justify-center">
-                {getCategoryIcon(category.icon)}
-              </div>
-              <div>
-                <h3 className="text-base sm:text-lg font-bold text-white group-hover:text-indigo-300 transition-colors">
-                  {category.title}
-                </h3>
-                <p className="text-xs text-slate-400">{category.description}</p>
-              </div>
+      {/* Categorized Skills (Terminal / Dotted Style inspired by gomuhandis.uz) */}
+      <div className="space-y-8">
+        {t.skills.categories.map((cat) => (
+          <div key={cat.key} className="space-y-2.5 font-mono">
+            {/* Category Label */}
+            <div className="text-xs text-slate-500 dark:text-slate-400 font-bold uppercase tracking-wider flex items-center gap-2">
+              <span className="text-emerald-500">//</span>
+              <span>{cat.title}</span>
             </div>
 
-            {/* Skill Items */}
-            <div className="space-y-3.5 mt-5">
-              {category.skills.map((skill) => (
+            {/* Skill rows with dotted connecting line */}
+            <div className="p-4 sm:p-5 rounded-2xl border transition-all border-slate-200 dark:border-white/10 bg-white/80 dark:bg-slate-900/60 backdrop-blur-xl space-y-2.5 shadow-sm">
+              {cat.items.map((item) => (
                 <div
-                  key={skill.name}
-                  className={`p-3 rounded-xl border transition-all ${
-                    skill.highlight
-                      ? 'bg-slate-800/70 border-indigo-500/30 shadow-sm'
-                      : 'bg-slate-900/60 border-slate-800'
-                  }`}
+                  key={item.name}
+                  onMouseEnter={() => soundFX.playClick(1050, 0.015)}
+                  className="flex items-center justify-between text-xs sm:text-sm group hover:text-emerald-500 transition-colors"
                 >
-                  <div className="flex items-center justify-between mb-1.5">
-                    <span className="font-bold text-xs sm:text-sm text-white flex items-center gap-2">
-                      {skill.name}
-                      {skill.highlight && (
-                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                      )}
-                    </span>
-                    <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-950/80 text-slate-300 border border-slate-800">
-                      {skill.level}
-                    </span>
-                  </div>
+                  <span className="text-slate-800 dark:text-slate-200 font-semibold group-hover:text-emerald-500 transition-colors shrink-0">
+                    {item.name}
+                  </span>
 
-                  <div className="flex flex-wrap gap-1">
-                    {skill.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="text-[10px] text-slate-400 font-mono bg-slate-800/50 px-2 py-0.5 rounded border border-slate-700/40"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
+                  {/* Dotted connector */}
+                  <span className="flex-1 mx-3 border-b border-dotted border-slate-300 dark:border-slate-700/60 opacity-60" />
+
+                  <span className="text-[11px] font-mono text-slate-500 dark:text-slate-400 group-hover:text-emerald-500 transition-colors shrink-0">
+                    {item.level}
+                  </span>
                 </div>
               ))}
             </div>
-
           </div>
         ))}
       </div>
+
     </section>
   );
 };

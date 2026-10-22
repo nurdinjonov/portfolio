@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
-import { Volume2, VolumeX, Menu, X } from 'lucide-react';
+import { Volume2, VolumeX, Menu, X, Sun, Moon } from 'lucide-react';
 import { soundFX } from '../utils/audio';
+import { useApp } from '../context/AppContext';
+import type { Language } from '../data/translations';
 
 export const Navbar: React.FC = () => {
+  const { lang, setLang, theme, toggleTheme, t } = useApp();
   const [soundEnabled, setSoundEnabled] = useState(true);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -19,87 +22,125 @@ export const Navbar: React.FC = () => {
     setMobileMenuOpen(false);
   };
 
+  const handleLangChange = (l: Language) => {
+    soundFX.playClick(850, 0.03);
+    setLang(l);
+  };
+
+  const handleThemeToggle = () => {
+    soundFX.playClick(950, 0.03);
+    toggleTheme();
+  };
+
   return (
-    <header className="fixed top-4 left-0 right-0 z-50 px-4 sm:px-6 max-w-6xl mx-auto">
-      <nav className="glass-panel px-4 sm:px-6 py-3 rounded-2xl flex items-center justify-between border border-white/10 shadow-2xl backdrop-blur-xl bg-slate-950/70">
+    <header className="fixed top-0 left-0 right-0 z-50 px-4 sm:px-6 py-3.5 backdrop-blur-xl border-b transition-colors duration-300 bg-white/80 border-slate-200/80 dark:bg-slate-950/80 dark:border-white/5">
+      <div className="max-w-5xl mx-auto flex items-center justify-between">
         
-        {/* Brand: Xojiakbar Nurdinjonov */}
+        {/* Brand: nurdinjonov _ */}
         <a 
           href="#home" 
           onClick={handleNavClick}
-          className="flex items-center gap-2.5 group font-sans text-sm sm:text-base font-extrabold text-white tracking-tight"
+          className="flex items-center gap-1.5 group font-mono text-sm sm:text-base font-bold tracking-tight text-slate-900 dark:text-white"
         >
-          <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-indigo-600 via-indigo-500 to-emerald-400 p-[1px] shadow-lg shadow-indigo-950/50 group-hover:scale-105 transition-transform">
-            <div className="w-full h-full bg-slate-950 rounded-[11px] flex items-center justify-center font-mono font-bold text-xs text-indigo-400">
-              XN
-            </div>
-          </div>
-          <div className="flex flex-col text-left">
-            <span className="leading-tight group-hover:text-indigo-300 transition-colors">Xojiakbar Nurdinjonov</span>
-            <span className="text-[10px] text-slate-400 font-normal font-mono">Software Engineer</span>
-          </div>
+          <span className="text-emerald-500 font-extrabold">&gt;</span>
+          <span className="group-hover:text-emerald-500 transition-colors">nurdinjonov</span>
+          <span className="animate-pulse text-emerald-500 font-extrabold">_</span>
         </a>
 
         {/* Desktop Navigation Links */}
-        <div className="hidden md:flex items-center gap-7 text-xs font-semibold text-slate-300">
-          <a href="#projects" onClick={handleNavClick} className="hover:text-white transition-colors">
-            Loyihalar
+        <nav className="hidden md:flex items-center gap-6 text-xs font-mono text-slate-600 dark:text-slate-400">
+          <a href="#about" onClick={handleNavClick} className="hover:text-emerald-500 transition-colors">
+            {t.nav.about}
           </a>
-          <a href="#skills" onClick={handleNavClick} className="hover:text-white transition-colors">
-            Texnologiyalar
+          <a href="#experience" onClick={handleNavClick} className="hover:text-emerald-500 transition-colors">
+            {t.nav.experience}
           </a>
-          <a href="#about" onClick={handleNavClick} className="hover:text-white transition-colors">
-            Men Haqimda
+          <a href="#skills" onClick={handleNavClick} className="hover:text-emerald-500 transition-colors">
+            {t.nav.skills}
           </a>
-          <a href="#contact" onClick={handleNavClick} className="hover:text-white transition-colors">
-            Bog'lanish
+          <a href="#projects" onClick={handleNavClick} className="hover:text-emerald-500 transition-colors">
+            {t.nav.projects}
           </a>
-        </div>
+          <a href="#contact" onClick={handleNavClick} className="hover:text-emerald-500 transition-colors">
+            {t.nav.contact}
+          </a>
+        </nav>
 
-        {/* Right Action Elements */}
-        <div className="flex items-center gap-3">
-          {/* Status Pill */}
-          <div className="hidden sm:flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-950/60 border border-emerald-500/30 text-[11px] text-emerald-300 font-medium">
-            <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-            </span>
-            <span>Open to Opportunities</span>
+        {/* Right Action Elements: Languages + Theme + Sound */}
+        <div className="flex items-center gap-2 sm:gap-3 text-xs font-mono">
+          
+          {/* Language Switcher */}
+          <div className="flex items-center gap-1 px-1.5 py-1 rounded-lg border border-slate-200 dark:border-white/10 bg-slate-100 dark:bg-slate-900/60">
+            {(['uz', 'en', 'ru'] as Language[]).map((l) => (
+              <button
+                key={l}
+                onClick={() => handleLangChange(l)}
+                className={`px-1.5 py-0.5 rounded transition-all text-[11px] uppercase ${
+                  lang === l
+                    ? 'text-emerald-600 dark:text-emerald-400 font-bold bg-white dark:bg-emerald-950/80 shadow-xs'
+                    : 'text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
+                }`}
+              >
+                {l}
+              </button>
+            ))}
           </div>
 
-          {/* Sound Toggle Button */}
+          {/* Theme Switcher: [dark] / [light] */}
+          <button
+            onClick={handleThemeToggle}
+            className="flex items-center gap-1.5 px-2 py-1 rounded-lg border border-slate-200 dark:border-white/10 bg-slate-100 dark:bg-slate-900/60 text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-colors"
+            title={theme === 'dark' ? "Light rejimga o'tish" : "Dark rejimga o'tish"}
+          >
+            {theme === 'dark' ? (
+              <>
+                <Sun className="w-3.5 h-3.5 text-amber-400" />
+                <span className="hidden sm:inline text-[11px] text-slate-400">[light]</span>
+              </>
+            ) : (
+              <>
+                <Moon className="w-3.5 h-3.5 text-indigo-600" />
+                <span className="hidden sm:inline text-[11px] text-slate-600">[dark]</span>
+              </>
+            )}
+          </button>
+
+          {/* Sound Toggle */}
           <button
             onClick={toggleSound}
             title={soundEnabled ? "Ovozlarni o'chirish" : "Ovozlarni yoqish"}
-            className="w-8 h-8 rounded-xl bg-slate-900/90 hover:bg-slate-800 border border-slate-700/80 flex items-center justify-center text-slate-300 hover:text-white transition-colors"
+            className="w-7 h-7 rounded-lg border border-slate-200 dark:border-white/10 bg-slate-100 dark:bg-slate-900/60 flex items-center justify-center text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors"
           >
-            {soundEnabled ? <Volume2 className="w-3.5 h-3.5 text-indigo-400" /> : <VolumeX className="w-3.5 h-3.5 text-slate-500" />}
+            {soundEnabled ? <Volume2 className="w-3.5 h-3.5 text-emerald-500" /> : <VolumeX className="w-3.5 h-3.5 text-slate-400" />}
           </button>
 
           {/* Mobile Menu Button */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden w-8 h-8 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-300"
+            className="md:hidden w-7 h-7 rounded-lg border border-slate-200 dark:border-white/10 bg-slate-100 dark:bg-slate-900/60 flex items-center justify-center text-slate-700 dark:text-slate-300"
           >
             {mobileMenuOpen ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
           </button>
         </div>
-      </nav>
+      </div>
 
       {/* Mobile Drawer */}
       {mobileMenuOpen && (
-        <div className="md:hidden mt-2 p-4 rounded-2xl glass-panel border border-white/10 bg-slate-950/95 shadow-2xl flex flex-col gap-3 text-sm text-slate-200">
-          <a href="#projects" onClick={handleNavClick} className="p-2.5 rounded-xl hover:bg-slate-800 font-medium">
-            📱 Loyihalar (DailyPlanner)
+        <div className="md:hidden mt-3 p-4 rounded-2xl border border-slate-200 dark:border-white/10 bg-white/95 dark:bg-slate-950/95 shadow-2xl flex flex-col gap-3 font-mono text-xs text-slate-800 dark:text-slate-200">
+          <a href="#about" onClick={handleNavClick} className="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-900">
+            # {t.nav.about}
           </a>
-          <a href="#skills" onClick={handleNavClick} className="p-2.5 rounded-xl hover:bg-slate-800 font-medium">
-            🛠 Texnologiyalar
+          <a href="#experience" onClick={handleNavClick} className="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-900">
+            # {t.nav.experience}
           </a>
-          <a href="#about" onClick={handleNavClick} className="p-2.5 rounded-xl hover:bg-slate-800 font-medium">
-            🎓 PDP Universiteti & Men Haqimda
+          <a href="#skills" onClick={handleNavClick} className="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-900">
+            # {t.nav.skills}
           </a>
-          <a href="#contact" onClick={handleNavClick} className="p-2.5 rounded-xl hover:bg-slate-800 font-medium">
-            📬 Bog'lanish
+          <a href="#projects" onClick={handleNavClick} className="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-900">
+            # {t.nav.projects}
+          </a>
+          <a href="#contact" onClick={handleNavClick} className="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-900">
+            # {t.nav.contact}
           </a>
         </div>
       )}

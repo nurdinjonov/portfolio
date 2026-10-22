@@ -1,8 +1,15 @@
 import React, { useEffect, useRef } from 'react';
 import * as THREE from 'three';
+import { useApp } from '../../context/AppContext';
 
 export const FullScreenCosmos: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
+  const { theme } = useApp();
+  const themeRef = useRef(theme);
+
+  useEffect(() => {
+    themeRef.current = theme;
+  }, [theme]);
 
   useEffect(() => {
     const container = containerRef.current;
@@ -10,7 +17,8 @@ export const FullScreenCosmos: React.FC = () => {
 
     // Scene, Camera, Renderer
     const scene = new THREE.Scene();
-    scene.fog = new THREE.FogExp2(0x030712, 0.035);
+    const fogColor = theme === 'dark' ? 0x030712 : 0xf8fafc;
+    scene.fog = new THREE.FogExp2(fogColor, 0.035);
 
     const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
     camera.position.z = 12;
@@ -19,7 +27,7 @@ export const FullScreenCosmos: React.FC = () => {
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    renderer.toneMappingExposure = 1.2;
+    renderer.toneMappingExposure = theme === 'dark' ? 1.2 : 1.0;
     container.appendChild(renderer.domElement);
 
     // Main 3D World Group
@@ -29,14 +37,14 @@ export const FullScreenCosmos: React.FC = () => {
     // 1. Central Spatial Torus Knot Core (Architectural Sculpture)
     const coreGeometry = new THREE.TorusKnotGeometry(2.4, 0.65, 120, 24);
     const coreMaterial = new THREE.MeshPhysicalMaterial({
-      color: 0x6366f1,
-      emissive: 0x312e81,
-      emissiveIntensity: 0.35,
+      color: theme === 'dark' ? 0x6366f1 : 0x4f46e5,
+      emissive: theme === 'dark' ? 0x312e81 : 0x312e81,
+      emissiveIntensity: theme === 'dark' ? 0.35 : 0.2,
       roughness: 0.1,
       metalness: 0.9,
       wireframe: true,
       transparent: true,
-      opacity: 0.35,
+      opacity: theme === 'dark' ? 0.35 : 0.2,
     });
     const coreMesh = new THREE.Mesh(coreGeometry, coreMaterial);
     coreMesh.position.set(2.5, 0.5, -2);
@@ -47,12 +55,12 @@ export const FullScreenCosmos: React.FC = () => {
     const gemMaterial = new THREE.MeshStandardMaterial({
       color: 0x10b981,
       emissive: 0x065f46,
-      emissiveIntensity: 0.6,
+      emissiveIntensity: theme === 'dark' ? 0.6 : 0.3,
       roughness: 0.3,
       metalness: 0.8,
       wireframe: false,
       transparent: true,
-      opacity: 0.45,
+      opacity: theme === 'dark' ? 0.45 : 0.25,
     });
     const gemMesh = new THREE.Mesh(gemGeometry, gemMaterial);
     gemMesh.position.copy(coreMesh.position);
@@ -68,7 +76,7 @@ export const FullScreenCosmos: React.FC = () => {
       color: 0x8b5cf6,
       side: THREE.DoubleSide,
       transparent: true,
-      opacity: 0.5,
+      opacity: theme === 'dark' ? 0.5 : 0.25,
     });
     const ring1 = new THREE.Mesh(ringGeometry, ringMaterial);
     ring1.rotation.x = Math.PI / 2.5;
@@ -115,15 +123,15 @@ export const FullScreenCosmos: React.FC = () => {
       size: 0.055,
       vertexColors: true,
       transparent: true,
-      opacity: 0.8,
-      blending: THREE.AdditiveBlending,
+      opacity: theme === 'dark' ? 0.8 : 0.45,
+      blending: theme === 'dark' ? THREE.AdditiveBlending : THREE.NormalBlending,
     });
 
     const particles = new THREE.Points(particleGeometry, particleMaterial);
     worldGroup.add(particles);
 
     // Lights
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
+    const ambientLight = new THREE.AmbientLight(0xffffff, theme === 'dark' ? 0.8 : 1.2);
     scene.add(ambientLight);
 
     const light1 = new THREE.PointLight(0x6366f1, 4, 30);
@@ -245,13 +253,13 @@ export const FullScreenCosmos: React.FC = () => {
       particleMaterial.dispose();
       renderer.dispose();
     };
-  }, []);
+  }, [theme]);
 
   return (
     <div
       ref={containerRef}
       className="fixed inset-0 w-full h-full pointer-events-none z-0 overflow-hidden"
-      style={{ opacity: 0.95 }}
+      style={{ opacity: theme === 'dark' ? 0.95 : 0.75 }}
     />
   );
 };

@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { ArrowUp } from 'lucide-react';
 import { soundFX } from '../utils/audio';
+import { useApp } from '../context/AppContext';
 
 export const Footer: React.FC = () => {
+  const { t } = useApp();
   const [time, setTime] = useState('');
 
   useEffect(() => {
@@ -29,33 +31,27 @@ export const Footer: React.FC = () => {
   };
 
   return (
-    <footer className="border-t border-white/5 bg-slate-950/80 backdrop-blur-xl py-12 px-4">
-      <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6 text-xs text-slate-400">
+    <footer className="border-t py-10 px-4 sm:px-6 transition-colors duration-300 font-mono text-xs border-slate-200 dark:border-white/5 bg-slate-50 dark:bg-slate-950/80">
+      <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-between gap-5 text-slate-500 dark:text-slate-400">
         
-        {/* Left: Brand & Copyright */}
-        <div className="flex flex-col sm:flex-row items-center gap-3">
-          <div className="font-sans text-white font-bold tracking-tight flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-indigo-500 animate-pulse" />
-            <span>Xojiakbar Nurdinjonov</span>
-          </div>
-          <span className="hidden sm:inline text-slate-600">•</span>
-          <div>© 2026 Barcha huquqlar himoyalangan.</div>
+        {/* Left: CLI deployment status */}
+        <div className="flex items-center gap-2 text-center sm:text-left">
+          <span className="text-emerald-500 font-bold">$</span>
+          <span>deployed with docker • vite • tls — © 2026 nurdinjonov</span>
         </div>
 
         {/* Center: Live Tashkent Time */}
-        <div className="flex items-center gap-3 font-mono text-[11px]">
-          <div className="flex items-center gap-1.5 px-3 py-1 rounded-md bg-slate-900 border border-slate-800 text-slate-300">
-            <span className="text-emerald-400">●</span>
-            <span>Toshkent: {time || '12:00:00'} (UTC+5)</span>
-          </div>
+        <div className="flex items-center gap-1.5 px-3 py-1 rounded-md border border-slate-200 dark:border-white/10 bg-white dark:bg-slate-900/60 text-[11px]">
+          <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+          <span>{t.footer.tashkent}: {time || '16:50:00'} (UTC+5)</span>
         </div>
 
         {/* Right: Scroll to top */}
         <button
           onClick={scrollToTop}
-          className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 border border-slate-800 text-slate-300 hover:text-white transition-colors text-xs font-mono"
+          className="flex items-center gap-1 text-slate-500 dark:text-slate-400 hover:text-emerald-500 transition-colors cursor-pointer"
         >
-          <span>Tepaga</span>
+          <span>{t.footer.top}</span>
           <ArrowUp className="w-3.5 h-3.5" />
         </button>
 
