@@ -6,18 +6,19 @@ export const projects: Project[] = [
     title: 'DailyPlanner & Focus',
     tagline: 'Sanoat darajasidagi C# .NET MAUI unumdorlik va rejalashtirish ekotizimi',
     category: 'Mobil & Desktop Ilova',
-    version: 'v1.2.1 Signed Release',
+    version: 'v1.2.2 Signed Release',
     status: 'Production',
     description: 
-      'Clean Architecture va MVVM andozalari asosida qurilgan, SQLite bilan xavfsiz ishlovchi, Google Calendar uslubidagi oylik taqvim, Duolingo-style streak odatlar, Pomodoro taymeri va tabiiy matnni (NLP) tahlil qiluvchi flagman mobil ilova.',
+      'Clean Architecture va MVVM andozalari asosida qurilgan, SQLite bilan xavfsiz ishlovchi, 29 kunlik interaktiv kalendar slayderi, Duolingo-style streak odatlar, SMS uslubidagi ovozli eslatmalar, Pomodoro taymeri va tabiiy matnni (NLP) tahlil qiluvchi flagman mobil ilova.',
     keyFeatures: [
+      '29 kunlik uzluksiz gorizontal kalendar slayderi va jonli vazifa indikatorlari',
+      'SMS uslubidagi ovozli va tebranishli aniq vaqtdagi eslatmalar (RTC_WAKEUP Exact Alarms)',
+      'Mukammallashtirilgan odatlar zanjiri (Streaks), 7 kunlik haftalik vizual tracker va jami kunlar hisobi',
       'Google Calendar oylik interaktiv to\'ri (42 kunlik jadval va ko\'p rangli vazifa nuqtalari)',
       'Natural Language Parser (Regex orqali "Ertaga 16:30 da C# darsi #PDP !yuqori" matnidan parametrlarni avtomatik ajratish)',
       'Pomodoro Focus Timer (25/5/15 daqiqalik chuqur diqqat va tanaffus rejimlari)',
-      'Habit Tracker & Duolingo-style Streaks (Kunlik uzluksizlik zanjiri va intizom ko\'rsatkichi)',
       'GitHub-Style Productivity Heatmap (So\'nggi 35 kunlik faollikning zumrad matritsasi)',
-      'Android 13/14+ Native Push Notifications (POST_NOTIFICATIONS va USE_EXACT_ALARM ruxsatlari bilan yuqori prioritetli kanal)',
-      'Tun va Kun (Dark/Light) rejimlarining xavfsiz dispetcher orqali to\'liq qo\'llab-quvvatlanishi'
+      'Yangi zamonaviy vektor kiber-reticle ilova logotipi va UI/UX optimizatsiyasi'
     ],
     techStack: [
       'C# 12',
