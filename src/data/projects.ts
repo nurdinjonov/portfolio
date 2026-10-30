@@ -6,12 +6,13 @@ export const projects: Project[] = [
     title: 'DailyPlanner & Focus',
     tagline: 'Sanoat darajasidagi C# .NET MAUI unumdorlik va rejalashtirish ekotizimi',
     category: 'Mobil & Desktop Ilova',
-    version: 'v1.2.2 Signed Release',
+    version: 'v1.2.3 Signed Release',
     status: 'Production',
     description: 
-      'Clean Architecture va MVVM andozalari asosida qurilgan, SQLite bilan xavfsiz ishlovchi, 29 kunlik interaktiv kalendar slayderi, Duolingo-style streak odatlar, SMS uslubidagi ovozli eslatmalar, Pomodoro taymeri va tabiiy matnni (NLP) tahlil qiluvchi flagman mobil ilova.',
+      'Clean Architecture va MVVM andozalari asosida qurilgan, SQLite bilan xavfsiz ishlovchi, 61 kunlik silliq interaktiv kalendar slayderi (bugungi sanaga avtomatik markazlanish), 6 ta bo\'limli to\'liq pastki menyu (Rejalar, Taqvim, Fokus, Odatlar, Tahlil, Profil), Duolingo-style streak odatlar, ovozli eslatmalar, Pomodoro taymeri va tabiiy matnni (NLP) tahlil qiluvchi flagman mobil ilova.',
     keyFeatures: [
-      '29 kunlik uzluksiz gorizontal kalendar slayderi va jonli vazifa indikatorlari',
+      '61 kunlik silliq gorizontal kalendar slayderi va bugungi sanaga avto-markazlanish',
+      '6 ta to\'g\'ridan-to\'g\'ri bo\'limli zamonaviy pastki navigatsiya paneli (ortiqcha "More" menyusisiz)',
       'SMS uslubidagi ovozli va tebranishli aniq vaqtdagi eslatmalar (RTC_WAKEUP Exact Alarms)',
       'Mukammallashtirilgan odatlar zanjiri (Streaks), 7 kunlik haftalik vizual tracker va jami kunlar hisobi',
       'Google Calendar oylik interaktiv to\'ri (42 kunlik jadval va ko\'p rangli vazifa nuqtalari)',

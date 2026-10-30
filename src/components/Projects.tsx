@@ -28,7 +28,7 @@ export const Projects: React.FC = () => {
 
     const link = document.createElement('a');
     link.href = '/DailyPlanner.apk';
-    link.download = 'DailyPlanner-v1.2.2-Signed.apk';
+    link.download = 'DailyPlanner-v1.2.3-Signed.apk';
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -71,7 +71,7 @@ export const Projects: React.FC = () => {
                   DailyPlanner & Focus
                 </h3>
                 <span className="px-2.5 py-0.5 rounded-full text-xs font-mono font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/40">
-                  v1.2.2 Signed APK
+                  v1.2.3 Signed APK
                 </span>
               </div>
               <div className="text-xs sm:text-sm font-mono text-slate-400 mt-0.5">

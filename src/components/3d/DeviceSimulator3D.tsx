@@ -213,7 +213,7 @@ export const DeviceSimulator3D: React.FC<DeviceSimulatorProps> = ({
                   {/* Selected date preview */}
                   <div className="p-2 rounded-xl bg-slate-800/90 border border-indigo-500/30">
                     <div className="text-[10px] font-bold text-indigo-300 mb-1">22-Oktabr vazifalari (3 ta):</div>
-                    <div className="text-[9px] text-slate-300">• 10:00 DailyPlanner v1.2.2 Release</div>
+                    <div className="text-[9px] text-slate-300">• 10:00 DailyPlanner v1.2.3 Release</div>
                     <div className="text-[9px] text-slate-300">• 16:30 PDP C# OOP Seminar</div>
                   </div>
                 </div>
