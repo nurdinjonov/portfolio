@@ -6,11 +6,13 @@ export const projects: Project[] = [
     title: 'DailyPlanner & Focus',
     tagline: 'Sanoat darajasidagi C# .NET MAUI unumdorlik va rejalashtirish ekotizimi',
     category: 'Mobil & Desktop Ilova',
-    version: 'v1.2.3 Signed Release',
+    version: 'v1.2.4 Signed Release',
     status: 'Production',
     description: 
-      'Clean Architecture va MVVM andozalari asosida qurilgan, SQLite bilan xavfsiz ishlovchi, 61 kunlik silliq interaktiv kalendar slayderi (bugungi sanaga avtomatik markazlanish), 6 ta bo\'limli to\'liq pastki menyu (Rejalar, Taqvim, Fokus, Odatlar, Tahlil, Profil), Duolingo-style streak odatlar, ovozli eslatmalar, Pomodoro taymeri va tabiiy matnni (NLP) tahlil qiluvchi flagman mobil ilova.',
+      'Clean Architecture va MVVM andozalari asosida qurilgan, SQLite bilan xavfsiz ishlovchi, rejalarni to\'liq tahrirlash (Edit) va aqlli tanlovli o\'chirish (faqat shu kun yoki kelgusi barcha takrorlanishlar uchun), 61 kunlik silliq interaktiv kalendar slayderi, 6 ta bo\'limli pastki menyu, Duolingo-style streak odatlar, ovozli eslatmalar, Pomodoro taymeri va tabiiy matnni (NLP) tahlil qiluvchi flagman mobil ilova.',
     keyFeatures: [
+      'Rejalarni to\'liq tahrirlash (Edit ✏️) va xavfsiz boshqarish',
+      'Takroriy rejalarni faqat bitta kun yoki kelgusi barchasi uchun alohida o\'zgartirish/o\'chirish (RFC 5545 standarti)',
       '61 kunlik silliq gorizontal kalendar slayderi va bugungi sanaga avto-markazlanish',
       '6 ta to\'g\'ridan-to\'g\'ri bo\'limli zamonaviy pastki navigatsiya paneli (ortiqcha "More" menyusisiz)',
       'SMS uslubidagi ovozli va tebranishli aniq vaqtdagi eslatmalar (RTC_WAKEUP Exact Alarms)',
