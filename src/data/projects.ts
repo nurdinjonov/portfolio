@@ -4,24 +4,24 @@ export const projects: Project[] = [
   {
     id: 'daily-planner',
     title: 'DailyPlanner & Focus',
-    tagline: 'Sanoat darajasidagi C# .NET MAUI unumdorlik va rejalashtirish ekotizimi',
-    category: 'Mobil & Desktop Ilova',
-    version: 'v1.2.4 Signed Release',
+    tagline: 'C# .NET MAUI texnologiyasida yaratilgan shaxsiy rejalashtirish va fokus ilovasi',
+    category: 'Mobil Ilova',
+    version: 'v1.2.5 Signed Release',
     status: 'Production',
     description: 
-      'Clean Architecture va MVVM andozalari asosida qurilgan, SQLite bilan xavfsiz ishlovchi, rejalarni to\'liq tahrirlash (Edit) va aqlli tanlovli o\'chirish (faqat shu kun yoki kelgusi barcha takrorlanishlar uchun), 61 kunlik silliq interaktiv kalendar slayderi, 6 ta bo\'limli pastki menyu, Duolingo-style streak odatlar, ovozli eslatmalar, Pomodoro taymeri va tabiiy matnni (NLP) tahlil qiluvchi flagman mobil ilova.',
+      'Clean Architecture va MVVM andozalari asosida qurilgan, SQLite bilan avtonom ishlovchi, rejalarni to\'liq tahrirlash (Edit), 61 kunlik interaktiv kalendar slayderi, 6 ta asosiy bo\'lim, streak odatlar, fon rejimida ovozli eslatmalar, Pomodoro taymeri va tabiiy matnni (NLP) tahlil qiluvchi mobil yordamchi.',
     keyFeatures: [
       'Rejalarni to\'liq tahrirlash (Edit ✏️) va xavfsiz boshqarish',
       'Takroriy rejalarni faqat bitta kun yoki kelgusi barchasi uchun alohida o\'zgartirish/o\'chirish (RFC 5545 standarti)',
       '61 kunlik silliq gorizontal kalendar slayderi va bugungi sanaga avto-markazlanish',
-      '6 ta to\'g\'ridan-to\'g\'ri bo\'limli zamonaviy pastki navigatsiya paneli (ortiqcha "More" menyusisiz)',
-      'SMS uslubidagi ovozli va tebranishli aniq vaqtdagi eslatmalar (RTC_WAKEUP Exact Alarms)',
-      'Mukammallashtirilgan odatlar zanjiri (Streaks), 7 kunlik haftalik vizual tracker va jami kunlar hisobi',
-      'Google Calendar oylik interaktiv to\'ri (42 kunlik jadval va ko\'p rangli vazifa nuqtalari)',
+      '6 ta to\'g\'ridan-to\'g\'ri bo\'limli qulay pastki navigatsiya paneli',
+      'Aniq vaqtdagi ovozli va tebranishli eslatmalar (RTC_WAKEUP Exact Alarms)',
+      'Odatlar zanjiri (Streaks), 7 kunlik haftalik vizual tracker va jami kunlar hisobi',
+      'Google Calendar oylik interaktiv to\'ri (42 kunlik jadval va rangli vazifa nuqtalari)',
       'Natural Language Parser (Regex orqali "Ertaga 16:30 da C# darsi #PDP !yuqori" matnidan parametrlarni avtomatik ajratish)',
       'Pomodoro Focus Timer (25/5/15 daqiqalik chuqur diqqat va tanaffus rejimlari)',
-      'GitHub-Style Productivity Heatmap (So\'nggi 35 kunlik faollikning zumrad matritsasi)',
-      'Yangi zamonaviy vektor kiber-reticle ilova logotipi va UI/UX optimizatsiyasi'
+      'GitHub-Style Productivity Heatmap (So\'nggi 35 kunlik faollik matritsasi)',
+      'Vektor kiber-reticle ilova logotipi va optimallashtirilgan UI/UX dizayn'
     ],
     techStack: [
       'C# 12',
@@ -30,15 +30,15 @@ export const projects: Project[] = [
       'SQLite (bundle_green)',
       'Clean Architecture',
       'Android Alarms & Notifications',
-      'ILLink AOT Tree-Shaking'
+      'ILLink AOT'
     ],
     apkFileName: 'DailyPlanner.apk',
     apkSize: '31.57 MB',
-    githubUrl: 'https://github.com/nurdinjonov/DailyPlanner',
+    githubUrl: 'https://github.com/nurdinjonov/dailyPlanner',
     featured: true,
     metrics: [
       { label: 'Hajmi (AOT)', value: '31.5 MB' },
-      { label: 'Xotira Oqishi', value: '0 Leak' },
+      { label: 'Ma\'lumotlar Bazasi', value: 'SQLite Offline' },
       { label: 'SDK Framework', value: '.NET 9.0' },
       { label: 'Android Versiya', value: 'Android 8.0 - 15' }
     ],

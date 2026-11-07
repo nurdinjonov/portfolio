@@ -28,7 +28,7 @@ export const Projects: React.FC = () => {
 
     const link = document.createElement('a');
     link.href = '/DailyPlanner.apk';
-    link.download = 'DailyPlanner-v1.2.4-Signed.apk';
+    link.download = 'DailyPlanner-v1.2.5-Signed.apk';
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -45,7 +45,7 @@ export const Projects: React.FC = () => {
       <div className="mb-12">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-950/60 border border-emerald-500/30 font-mono text-xs text-emerald-400 mb-3">
           <Smartphone className="w-3.5 h-3.5 text-emerald-400" />
-          <span>Flagman Mobil Loyiha</span>
+          <span>Amaliy Mobil Loyiha</span>
         </div>
         <h2 className="font-mono text-2xl sm:text-4xl font-extrabold text-white flex items-center gap-2.5">
           <span className="text-emerald-400">#</span>
@@ -71,7 +71,7 @@ export const Projects: React.FC = () => {
                   DailyPlanner & Focus
                 </h3>
                 <span className="px-2.5 py-0.5 rounded-full text-xs font-mono font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/40">
-                  v1.2.4 Signed APK
+                  v1.2.5 Signed APK
                 </span>
               </div>
               <div className="text-xs sm:text-sm font-mono text-slate-400 mt-0.5">
