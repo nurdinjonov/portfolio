@@ -6,7 +6,7 @@ export const projects: Project[] = [
     title: 'DailyPlanner & Focus',
     tagline: 'C# .NET MAUI texnologiyasida yaratilgan shaxsiy rejalashtirish va fokus ilovasi',
     category: 'Mobil Ilova',
-    version: 'v1.2.5 Signed Release',
+    version: 'v1.2.6 Signed Release',
     status: 'Production',
     description: 
       'Clean Architecture va MVVM andozalari asosida qurilgan, SQLite bilan avtonom ishlovchi, rejalarni to\'liq tahrirlash (Edit), 61 kunlik interaktiv kalendar slayderi, 6 ta asosiy bo\'lim, streak odatlar, fon rejimida ovozli eslatmalar, Pomodoro taymeri va tabiiy matnni (NLP) tahlil qiluvchi mobil yordamchi.',
